@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Todo {
+class Todo: Codable {
     
     var name: String
     var done = false
@@ -21,4 +21,17 @@ class Todo {
         self.name = ""
     }
     
+
+    static func loadSampleData() -> [Todo] {
+        let todos = [
+            Todo(name: "Shave the cat"),
+            Todo(name: "Go see a doctor for deadly scratches")
+        ]
+        return todos
+    }
+    static func getArchiveURL() -> URL {
+        let plistName = "todos"
+        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        return documentsDirectory.appendingPathComponent(plistName).appendingPathExtension("plist")
+    }
 }
